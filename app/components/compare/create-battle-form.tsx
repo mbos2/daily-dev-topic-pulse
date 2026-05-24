@@ -7,6 +7,7 @@ import {getTags} from '@/app/lib/api/get-tags';
 import {BattleResult} from '@/app/components/battle/battle-result';
 import type {BattleResponseDto, DailyTag} from '@/app/lib/types';
 import {getBattle} from '@/app/lib/api/get-battle';
+import {Tooltip} from '../general/tooltip';
 
 const MIN_TOPICS = 2;
 const FORM_SLOTS = 3;
@@ -134,7 +135,14 @@ export function CreateBattleForm() {
       <VStack h="80vh" justify="center" gap={6}>
         <Spinner color="#ff4b0a" size="xl" />
 
-        <Text color="white" fontSize="64px" fontWeight="700">
+        <Text
+          color="white"
+          fontWeight="700"
+          textAlign="center"
+          fontSize={{
+            base: '2rem',
+            md: '64px',
+          }}>
           Fetching your results
         </Text>
 
@@ -168,20 +176,31 @@ export function CreateBattleForm() {
         md: 8,
       }}
       gap={10}>
-      <VStack gap="14px">
+      <VStack gap={4} maxW="100%" align="center">
         <Text
-          fontSize={{
-            base: '40px',
-            md: '64px',
-          }}
-          lineHeight="0.95"
           color={'#ff7d4a'}
-          textAlign="center">
+          fontWeight={'600'}
+          fontSize={{
+            base: '2rem',
+            md: '4rem',
+            lg: '5rem',
+          }}
+          lineHeight="0.9"
+          maxW="100%"
+          textAlign="center"
+          wordBreak="break-word">
           Create a Topic Battle
         </Text>
 
-        <Text color="#8f96a3" fontSize="20px">
-          Select 2–3 developer topics and compare how momentum shifts over time.
+        <Text
+          color="#8f96a3"
+          fontSize={{
+            base: '1rem',
+            md: '1.25rem',
+          }}
+          textAlign="center"
+          maxW="34rem">
+          Select 2 - 3 developer topics and compare how momentum shifts over time.
         </Text>
       </VStack>
 
@@ -189,21 +208,33 @@ export function CreateBattleForm() {
         <Stack
           direction={{
             base: 'column',
-            lg: 'row',
+            md: 'row',
           }}
           width="100%"
+          gap={3}
           align="center"
-          justify="center"
-          gap={6}
-          flexWrap="wrap">
+          justify="center">
           {selected.map((value, index) => (
             <Box
               key={index}
-              w="100%"
-              maxW="22rem"
-              h="8rem"
-              px="2rem"
-              py="1.5rem"
+              w={{
+                base: '100%',
+                xl: '22rem',
+              }}
+              maxW="100%"
+              minH={{
+                base: '6rem',
+                lg: '8rem',
+              }}
+              h="auto"
+              px={{
+                base: '1.25rem',
+                lg: '2rem',
+              }}
+              py={{
+                base: '1rem',
+                lg: '1.5rem',
+              }}
               display="grid"
               gridTemplateColumns="1fr auto"
               alignItems="center"
@@ -213,7 +244,11 @@ export function CreateBattleForm() {
               bg={value ? '#111319' : 'transparent'}
               border={value ? '1px solid #1b1e28' : '1px dashed #262a36'}>
               <Text
-                fontSize="2rem"
+                fontSize={{
+                  base: '1.75rem',
+                  lg: '1.2rem',
+                }}
+                textAlign={'center'}
                 lineHeight="1.2"
                 fontWeight="600"
                 color={value ? '#fff' : '#8b8f99'}
@@ -224,7 +259,7 @@ export function CreateBattleForm() {
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
                 }}>
-                {value || '+ Pick Topic'}
+                {value ? value : 'Choose topic bellow'}
               </Text>
 
               {value && (
@@ -250,13 +285,16 @@ export function CreateBattleForm() {
             Select Period
           </Text>
 
-          <HStack gap="0.75rem">
+          <HStack gap="0.75rem" flexWrap="wrap" justify="center">
             {(['day', 'week', 'month'] as const).map((value) => (
               <Button
                 key={value}
                 all="unset"
                 h="3rem"
-                minW="6rem"
+                minW={{
+                  base: '5rem',
+                  md: '6rem',
+                }}
                 px="1.5rem"
                 borderRadius="999px"
                 border="1px solid"
@@ -269,54 +307,111 @@ export function CreateBattleForm() {
             ))}
           </HStack>
         </Box>
-        <HStack w="full" gap={3} alignItems={'center'} justifyContent={'center'}>
-          <Button
-            h="76px"
-            px="60px"
-            borderRadius="14px"
-            bg={canCompare ? '#ff4b0a' : '#2a2c34'}
-            color="white"
-            fontSize="28px"
-            fontWeight="700"
-            disabled={!canCompare}
-            onClick={handleCompare}>
-            Compare →
-          </Button>
+        <Stack
+          display={'flex'}
+          direction={{
+            base: 'column',
+            md: 'row',
+          }}
+          w="100%"
+          gap={3}
+          alignItems={'center'}
+          justifyContent={'center'}>
+          <Tooltip content={'Choose at least 2 topics to compare'} showArrow positioning={{placement: 'bottom'}}>
+            <Button
+              h={{
+                base: '3rem',
+                md: '4.75rem',
+              }}
+              w={{
+                base: '12rem',
+                md: 'auto',
+              }}
+              px={{
+                base: 6,
+                md: 15,
+              }}
+              fontSize={{
+                base: '1.25rem',
+                md: '1.75rem',
+              }}
+              borderRadius="14px"
+              bg={canCompare ? '#ff4b0a' : '#2a2c34'}
+              color="white"
+              fontWeight="700"
+              disabled={!canCompare}
+              onClick={handleCompare}>
+              Compare →
+            </Button>
+          </Tooltip>
 
           <Button
-            h="76px"
-            px="60px"
+            h={{
+              base: '3rem',
+              md: '4.75rem',
+            }}
+            w={{
+              base: '12rem',
+              md: 'auto',
+            }}
+            px={{
+              base: 6,
+              md: 15,
+            }}
+            fontSize={{
+              base: '1.25rem',
+              md: '1.45rem',
+            }}
             borderRadius="14px"
             bg={'#2a2c34'}
             color="white"
-            fontSize="28px"
             fontWeight="700"
             onClick={handleRandomBattle}>
             Random Battle 🎲
           </Button>
-        </HStack>
+        </Stack>
       </VStack>
 
       <Box w="100%" maxW="1200px">
-        <HStack justify="space-between" mb="34px" align="end">
+        <Stack
+          direction={{
+            base: 'column',
+            lg: 'row',
+          }}
+          justify="space-between"
+          mb="34px"
+          align={{
+            base: 'stretch',
+            lg: 'end',
+          }}
+          gap={4}>
           <Box>
-            <Text fontSize="42px" fontWeight="700" color={'#ff7d4a'}>
+            <Text
+              fontSize={{
+                base: '2rem',
+                lg: '42px',
+              }}
+              fontWeight="700"
+              color={'#ff7d4a'}>
               Browse Topics
             </Text>
-            <Text color="#8b8f99">Click to add into selection.</Text>
+            <Text color="rgba(139, 143, 153, 1)">Click to add into selection.</Text>
           </Box>
 
           <Input
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Search developer topics..."
-            w="360px"
+            w={{
+              base: '100%',
+              lg: '360px',
+            }}
             h="54px"
             bg="#0f1218"
             border="1px solid #1c2230"
             color="white"
           />
-        </HStack>
+        </Stack>
         {filtered.length === 0 ? (
           <Box>
             <Text fontSize={'3xl'} textAlign={'center'}>
@@ -324,23 +419,31 @@ export function CreateBattleForm() {
             </Text>
           </Box>
         ) : (
-          <Box>
+          <Box display="flex" flexWrap="wrap" gap="0.75rem">
             {filtered.map((tag) => (
-              <Tag.Root
-                key={tag.name}
-                display="inline-flex"
-                cursor="pointer"
-                m="8px"
-                px="18px"
-                py="10px"
-                borderRadius="999px"
-                bg={selected.includes(tag.name) ? '#241913' : '#0d1017'}
-                border="1px solid"
-                borderColor={selected.includes(tag.name) ? '#ff7d4a' : '#202636'}
-                onClick={() => addTopic(tag.name)}>
-                <Tag.Label color={selected.includes(tag.name) ? '#ffb28d' : '#ffffff'} fontSize="18px">
-                  {tag.name}
-                </Tag.Label>
+              <Tag.Root key={tag.name} asChild>
+                <Box
+                  as="button"
+                  cursor="pointer"
+                  px="1.125rem"
+                  h="3rem"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderRadius="5px"
+                  bg="#07080d"
+                  border="1px solid"
+                  borderColor={selected.includes(tag.name) ? '#ff7d4a' : '#202636'}
+                  boxShadow={selected.includes(tag.name) ? '0px 0px 5px 2px rgba(255,125,74,1)' : ''}
+                  flexShrink={0}
+                  onClick={() => addTopic(tag.name)}>
+                  <Tag.Label
+                    color={selected.includes(tag.name) ? '#f0cbbaff' : '#ff7d4a'}
+                    fontSize="1.125rem"
+                    lineHeight="1">
+                    {tag.name}
+                  </Tag.Label>
+                </Box>
               </Tag.Root>
             ))}
           </Box>

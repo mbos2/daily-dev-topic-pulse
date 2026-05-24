@@ -3,7 +3,6 @@
 import {Box, HStack, Text, VStack} from '@chakra-ui/react';
 
 import type {BattleResponseDto} from '@/app/lib/types';
-import {BattleShare} from './battle-share';
 interface BattleHeroProps {
   battle: BattleResponseDto;
 }
@@ -104,10 +103,6 @@ export function BattleHero({battle}: BattleHeroProps) {
               </Box>
             ))}
           </HStack>
-          <BattleShare battle={battle} />
-          <Text color="#8d95a4" fontSize="xs" textAlign="center" maxW="26rem">
-            Battle summary is copied automatically for easy paste into social posts.
-          </Text>
         </VStack>
       </Box>
     </VStack>

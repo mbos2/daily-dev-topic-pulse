@@ -103,6 +103,7 @@ export function BattleHero({battle}: BattleHeroProps) {
               </Box>
             ))}
           </HStack>
+          <Box>{battle.createdAt ? `Created at: ${new Date(battle.createdAt).toLocaleDateString()}` : ''}</Box>
         </VStack>
       </Box>
     </VStack>

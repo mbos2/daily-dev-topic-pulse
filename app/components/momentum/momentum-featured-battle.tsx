@@ -131,25 +131,19 @@ function ClosestCard({battle}: {battle: HistorySnapshotPartial}) {
           lineHeight="1"
           fontWeight="900"
           fontSize={{
-            base: '40px',
-            lg: '56px',
+            base: '28px',
+            lg: '46px',
           }}>
           {getBattleTitle(battle)}
         </Text>
 
-        <Text mt={6} color="#A0A7B4">
-          A historic transition point for developer preference.
-        </Text>
-
-        <Spacer />
-
-        <Grid templateColumns="1fr 1fr" gap={8}>
+        <Grid templateColumns="1fr 1fr" gap={8} mt={6}>
           <Box>
-            <Text color="#A0A7B4" fontSize="12px">
+            <Text color="#A0A7B4" fontSize="16px">
               Victory Delta
             </Text>
 
-            <Text mt={2} color="#FF8F6A" fontWeight="900" fontSize="36px">
+            <Text mt={2} color="#FF8F6A" fontWeight="900" fontSize="46px">
               {getDelta(battle)}
             </Text>
           </Box>
@@ -159,7 +153,7 @@ function ClosestCard({battle}: {battle: HistorySnapshotPartial}) {
               Period
             </Text>
 
-            <Text mt={2} color="white" fontWeight="900" fontSize="36px">
+            <Text mt={6} color="white" fontWeight="900" fontSize="36px" textTransform={'uppercase'}>
               {battle.period}
             </Text>
           </Box>

@@ -259,7 +259,7 @@ export function CreateBattleForm() {
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
                 }}>
-                {!value && 'Choose topic bellow'}
+                {value ? value : 'Choose topic bellow'}
               </Text>
 
               {value && (

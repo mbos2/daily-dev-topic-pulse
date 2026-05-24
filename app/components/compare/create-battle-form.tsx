@@ -2,7 +2,7 @@
 
 import {useEffect, useMemo, useState} from 'react';
 
-import {Box, Button, HStack, Input, Spinner, Tag, Text, VStack} from '@chakra-ui/react';
+import {Box, Button, HStack, Input, Spinner, Stack, Tag, Text, VStack} from '@chakra-ui/react';
 
 import {IoCloseCircleSharp} from 'react-icons/io5';
 
@@ -163,9 +163,31 @@ export function CreateBattleForm() {
   }
 
   return (
-    <VStack w="100%" pt="40px" pb="60px" px="30px" gap="40px" color="white">
+    <VStack
+      w="100%"
+      maxW="100%"
+      pt={{
+        base: 8,
+        lg: 10,
+      }}
+      pb={{
+        base: 12,
+        lg: 16,
+      }}
+      px={{
+        base: 4,
+        md: 8,
+      }}
+      gap={10}>
       <VStack gap="14px">
-        <Text fontSize="64px" lineHeight="1" fontWeight="700">
+        <Text
+          fontSize={{
+            base: '40px',
+            md: '64px',
+          }}
+          lineHeight="0.95"
+          color={'#ff7d4a'}
+          textAlign="center">
           Create a Topic Battle
         </Text>
 
@@ -175,11 +197,21 @@ export function CreateBattleForm() {
       </VStack>
 
       <VStack gap="24px">
-        <HStack gap="24px" flexWrap="wrap" justify="center">
+        <Stack
+          direction={{
+            base: 'column',
+            lg: 'row',
+          }}
+          width="100%"
+          align="center"
+          justify="center"
+          gap={6}
+          flexWrap="wrap">
           {selected.map((value, index) => (
             <Box
               key={index}
-              w="22rem"
+              w="100%"
+              maxW="22rem"
               h="8rem"
               px="2rem"
               py="1.5rem"
@@ -222,7 +254,7 @@ export function CreateBattleForm() {
               )}
             </Box>
           ))}
-        </HStack>
+        </Stack>
 
         <Box display="flex" flexDirection="column" alignItems="center" gap="1rem">
           <Text fontSize="0.875rem" color="#8f96a3" fontWeight="600" textTransform="uppercase" letterSpacing="0.12em">
@@ -279,7 +311,7 @@ export function CreateBattleForm() {
       <Box w="100%" maxW="1200px">
         <HStack justify="space-between" mb="34px" align="end">
           <Box>
-            <Text fontSize="42px" fontWeight="700">
+            <Text fontSize="42px" fontWeight="700" color={'#ff7d4a'}>
               Browse Topics
             </Text>
             <Text color="#8b8f99">Click to add into selection.</Text>

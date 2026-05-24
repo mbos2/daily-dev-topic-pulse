@@ -46,6 +46,7 @@ export interface BattleResponseDto {
   sharedPosts: number;
   topics: BattleTopic[];
   stats: BattleStats;
+  createdAt?: string;
 }
 
 export interface BattleQuery {
